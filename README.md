@@ -8,9 +8,9 @@
 
 ### Prerequisites
 ---------------------
-- python >= 3.9
+- python >= 3.13
 - Git
-- Virtualenv
+- uv
 
 ### Initial Setup
 ---------------------
@@ -22,7 +22,7 @@
 
 - Create a virtualenv
 ```
-    $ virtualenv venv --python=python3.9
+    $ virtualenv venv --python=python3.13
     $ source venv/bin/activate
 ```
 
@@ -32,11 +32,7 @@ on Windows,
 ```
 - install development dependencies.
 ```
-   $ pip install -r requirements/dev.txt
-```
-- build project
-```
-   $ pip install .
+   $ uv sync
 ```
 
 ## View API Documentation
