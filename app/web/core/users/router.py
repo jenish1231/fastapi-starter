@@ -1,13 +1,11 @@
 from typing import List
 
-from app.postgres.repository.user_repo import SQLUserRepository
+from fastapi import APIRouter, Depends
 
+from app.postgres.repository.user_repo import SQLUserRepository
 from app.web.core.users.protocols import IUserRepository
 from app.web.core.users.schemas import GenericResponse, UserSchema
 from app.web.core.users.services import UserService
-
-from fastapi import APIRouter, Depends
-
 
 router = APIRouter()
 
@@ -29,12 +27,11 @@ async def get_users(
     return GenericResponse(data=users_from_sql)
 
 
-@router.get('/users/{id}', response_model=GenericResponse[UserSchema])
+@router.get("/users/{id}", response_model=GenericResponse[UserSchema])
 async def get_user(
     id: int,
     service: UserService = Depends(),
     repository: IUserRepository = Depends(SQLUserRepository),
 ):
-
     user_from_sql = await service.get_user(repository, id=id)
     return GenericResponse(data=user_from_sql)

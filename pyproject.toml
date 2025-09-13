@@ -1,0 +1,80 @@
+[project]
+name = "app"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "sqlalchemy==2.0.43",
+    "fastapi==0.116.1",
+    "uvicorn==0.35.0",
+    "pydantic==2.11.9",
+    "aiosqlite==0.21.0"
+]
+
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.3.0",
+    "ruff>=0.12.11",
+    "ty>=0.0.1a19",
+]
+
+[build-system]
+requires =['hatchling']
+build-backend ='hatchling.build'
+
+[tool.hatch.build.targets.wheel]
+packages=['app']
+
+[tool.hatch.build.targets.sdist]
+include =["app/**", "README.md"]
+
+[tool.ruff]
+line-length = 120
+exclude = [
+  ".git",
+  ".vim",
+  ".mypy_cache",
+  ".pytest_cache",
+  ".ruff_cache",
+  ".tox",
+  ".venv",
+  "build",
+  "dist",
+  "uv.lock"
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+# extend-exclude = ["*.pyi"]
+preview = true
+
+[tool.ruff.lint]
+ignore = ["E711", "E712", "F403", "F405"]
+fixable = ['ALL']
+select = [
+  'I',
+  'F401',
+  'F841',
+  'T201',
+]
+
+[tool.coverage.run]
+omit = [
+    "*/dist-packages/*",
+    "*/distutils/*",
+    "tests/*",
+    "integration/*",
+    "build/*",
+    "venv/*"
+]
+
+[tool.ty.rules]
+unresolved-import = "ignore"
+
+[tool.ty.src]
+include = ["src", "tests"]
+exclude = ["src/generated", "uv.lock"]

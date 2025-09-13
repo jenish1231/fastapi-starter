@@ -1,6 +1,6 @@
-from app.web.core.users.views import router as users_router
-
 from fastapi import APIRouter
+
+from app.web.core.users.router import router as users_router
 
 router = APIRouter()
 
